@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://c0yocysepqwbc"]
+
+[ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_fv0pm"]
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_p7mq2"]
+
+[sub_resource type="Resource" id="Resource_jyj84"]
+script = ExtResource("1_fv0pm")
+health_change = 8
+satiety_change = 15
+mana_change = 3
+add_max_health = 0
+add_max_satiety = 2
+add_max_mana = 2
+add_attack = 0
+add_defense = 0
+add_base_speed = 0
+metadata/_custom_type_script = "uid://b7ddghsgeh82d"
+
+[resource]
+script = ExtResource("1_p7mq2")
+item_name = "orange"
+description = "an  orange orange"
+stackable = true
+max_stack_size = 5
+consumable_props = SubResource("Resource_jyj84")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

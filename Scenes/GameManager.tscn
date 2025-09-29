@@ -1,0 +1,49 @@
+[gd_scene load_steps=19 format=3 uid="uid://bt8iapb6gg8m3"]
+
+[ext_resource type="Script" uid="uid://dv1aynggb7ckn" path="res://Scripts/GameManager.gd" id="1_m2tc1"]
+[ext_resource type="Resource" uid="uid://d28mcqx356ynn" path="res://Resources/player_stats.tres" id="2_2wx25"]
+[ext_resource type="Script" uid="uid://etw17btwd6j1" path="res://Scripts/InventorySlot.gd" id="3_2wx25"]
+[ext_resource type="Resource" uid="uid://bq2rciytxs3i5" path="res://Resources/link.tres" id="3_73o00"]
+[ext_resource type="Resource" uid="uid://djf0d5kcpsfge" path="res://Resources/sword.tres" id="3_mmuqr"]
+[ext_resource type="Script" uid="uid://bh7f0ms8tdo05" path="res://Scripts/CharacterData.gd" id="4_5p8nv"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="4_je8vj"]
+[ext_resource type="Resource" uid="uid://c20k3kgf3o340" path="res://Resources/banana.tres" id="5_f5c43"]
+[ext_resource type="Resource" uid="uid://dtfnu1nldjhc0" path="res://Resources/zelda.tres" id="5_kw7i1"]
+[ext_resource type="Resource" uid="uid://cq8ieaoxpffuo" path="res://Resources/iron_pot.tres" id="7_2wx25"]
+[ext_resource type="Script" uid="uid://c72f8gn2ag153" path="res://Scripts/Recipe.gd" id="7_2ykxs"]
+[ext_resource type="Resource" uid="uid://br2cillsywjfn" path="res://Resources/vegan_soup_recipe.tres" id="8_2wx25"]
+[ext_resource type="Script" uid="uid://d2fm2g2isg1k6" path="res://Scripts/CookingTechnique.gd" id="9_73o00"]
+[ext_resource type="Resource" uid="uid://f4jlg0svitco" path="res://Resources/stewing.tres" id="10_tf73o"]
+
+[sub_resource type="Resource" id="Resource_73o00"]
+script = ExtResource("3_2wx25")
+item = ExtResource("4_je8vj")
+quantity = 1
+metadata/_custom_type_script = "uid://etw17btwd6j1"
+
+[sub_resource type="Resource" id="Resource_tf73o"]
+script = ExtResource("3_2wx25")
+item = ExtResource("5_f5c43")
+quantity = 1
+metadata/_custom_type_script = "uid://etw17btwd6j1"
+
+[sub_resource type="Resource" id="Resource_5p8nv"]
+script = ExtResource("3_2wx25")
+item = ExtResource("7_2wx25")
+quantity = 1
+metadata/_custom_type_script = "uid://etw17btwd6j1"
+
+[sub_resource type="Resource" id="Resource_kw7i1"]
+script = ExtResource("3_2wx25")
+item = ExtResource("3_mmuqr")
+quantity = 1
+metadata/_custom_type_script = "uid://etw17btwd6j1"
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_m2tc1")
+player_stats_resource = ExtResource("2_2wx25")
+initial_player_data = ExtResource("3_73o00")
+initial_party = Array[ExtResource("4_5p8nv")]([ExtResource("3_73o00"), ExtResource("5_kw7i1")])
+initial_player_inventory = Array[ExtResource("3_2wx25")]([SubResource("Resource_73o00"), SubResource("Resource_tf73o"), SubResource("Resource_5p8nv"), SubResource("Resource_kw7i1")])
+initial_recipes = Array[ExtResource("7_2ykxs")]([ExtResource("8_2wx25")])
+initial_techniques = Array[ExtResource("9_73o00")]([ExtResource("10_tf73o")])

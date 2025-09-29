@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=6 format=3 uid="uid://dlhjjw1pbye6v"]
+
+[ext_resource type="Script" uid="uid://etw17btwd6j1" path="res://Scripts/InventorySlot.gd" id="1_6m4cg"]
+[ext_resource type="Script" uid="uid://bh7f0ms8tdo05" path="res://Scripts/CharacterData.gd" id="1_4362a"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="2_hvuux"]
+[ext_resource type="Resource" uid="uid://qx5b2bjymeub" path="res://Resources/enemy_stats.tres" id="2_x7ge7"]
+
+[sub_resource type="Resource" id="Resource_ivsjl"]
+script = ExtResource("1_6m4cg")
+item = ExtResource("2_hvuux")
+quantity = 1
+metadata/_custom_type_script = "uid://etw17btwd6j1"
+
+[resource]
+script = ExtResource("1_4362a")
+character_id = "00101000"
+character_name = "Ganon"
+stats = ExtResource("2_x7ge7")
+equipped_slots = {}
+loot_drops = Array[ExtResource("1_6m4cg")]([SubResource("Resource_ivsjl")])
+metadata/_custom_type_script = "uid://bh7f0ms8tdo05"

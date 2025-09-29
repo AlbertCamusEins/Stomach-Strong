@@ -1,0 +1,80 @@
+[gd_scene load_steps=19 format=3 uid="uid://bv8nwk1opdjlw"]
+
+[ext_resource type="PackedScene" uid="uid://4y05vc33l6jx" path="res://Scenes/Character.tscn" id="1_h0vor"]
+[ext_resource type="Script" uid="uid://cum21nkxacfyc" path="res://Scripts/WorldMap.gd" id="1_lgebn"]
+[ext_resource type="Resource" uid="uid://qx5b2bjymeub" path="res://Resources/enemy_stats.tres" id="2_nnt0k"]
+[ext_resource type="PackedScene" uid="uid://bytpvx8hadc10" path="res://Scenes/MapTest.tscn" id="4_ymbeh"]
+[ext_resource type="PackedScene" uid="uid://daift07xjfewj" path="res://UI/StatusScreen.tscn" id="5_ovel5"]
+[ext_resource type="PackedScene" uid="uid://c1oai7yh2v8b" path="res://Scenes/CookingSpot.tscn" id="6_6g17r"]
+[ext_resource type="PackedScene" uid="uid://bylyjbc8mqhuf" path="res://UI/CookingUI.tscn" id="7_k2sq4"]
+[ext_resource type="PackedScene" uid="uid://dpv72e52rgi2" path="res://Scenes/NPC.tscn" id="8_e6b1v"]
+[ext_resource type="Resource" uid="uid://dve60r0fuq10f" path="res://Resources/village_chief_dialogue.tres" id="9_tp53l"]
+[ext_resource type="PackedScene" uid="uid://b7i0o2ynwdbgj" path="res://UI/DialogueUI.tscn" id="10_0qwcn"]
+[ext_resource type="PackedScene" uid="uid://bhn0ey82rjjr6" path="res://UI/QuestJournalUI.tscn" id="11_3xaw4"]
+[ext_resource type="PackedScene" uid="uid://bvdi3p2fcoxc1" path="res://Scenes/WorldItem.tscn" id="12_luyaf"]
+[ext_resource type="Resource" uid="uid://c20k3kgf3o340" path="res://Resources/banana.tres" id="13_0vgg2"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="14_5d56a"]
+[ext_resource type="PackedScene" uid="uid://b84es63wf2hhe" path="res://UI/PartyScreen.tscn" id="15_6pwv1"]
+[ext_resource type="PackedScene" uid="uid://cvtwcxxlvg3g2" path="res://Scenes/EncounterEntity.tscn" id="15_y6rwo"]
+[ext_resource type="Resource" uid="uid://j4v36lmn88u4" path="res://Resources/enemy_group_1.tres" id="16_y6rwo"]
+[ext_resource type="Resource" uid="uid://fs7l0cm0i77b" path="res://Resources/chef_dialogue.tres" id="18_u8pi1"]
+
+[node name="WorldMap" type="Node2D"]
+script = ExtResource("1_lgebn")
+enemy_in_area = ExtResource("2_nnt0k")
+encounter_in_area = ExtResource("16_y6rwo")
+
+[node name="MapTest" parent="." instance=ExtResource("4_ymbeh")]
+
+[node name="Character" parent="MapTest" groups=["Player"] instance=ExtResource("1_h0vor")]
+position = Vector2(224, 538)
+
+[node name="StatusScreen" parent="." instance=ExtResource("5_ovel5")]
+
+[node name="CookingSpot" parent="." groups=["CookingSpots"] instance=ExtResource("6_6g17r")]
+position = Vector2(135, 584)
+
+[node name="CookingUi" parent="." instance=ExtResource("7_k2sq4")]
+
+[node name="NPC" parent="." groups=["NPCs"] instance=ExtResource("8_e6b1v")]
+position = Vector2(284, 524)
+dialogue = ExtResource("9_tp53l")
+
+[node name="Label2" type="Label" parent="NPC"]
+offset_left = -19.0
+offset_top = -31.0
+offset_right = 21.0
+offset_bottom = -8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "村长"
+
+[node name="DialogueUI" parent="." instance=ExtResource("10_0qwcn")]
+
+[node name="QuestJournalUI" parent="." instance=ExtResource("11_3xaw4")]
+process_mode = 3
+
+[node name="Banana" parent="." instance=ExtResource("12_luyaf")]
+position = Vector2(244, 714)
+item = ExtResource("13_0vgg2")
+
+[node name="Apple" parent="." instance=ExtResource("12_luyaf")]
+position = Vector2(113, 718)
+item = ExtResource("14_5d56a")
+
+[node name="PartyScreen" parent="." instance=ExtResource("15_6pwv1")]
+
+[node name="EncounterEntity" parent="." instance=ExtResource("15_y6rwo")]
+position = Vector2(170, 631)
+encounter = ExtResource("16_y6rwo")
+
+[node name="NPC2" parent="." groups=["NPCs"] instance=ExtResource("8_e6b1v")]
+position = Vector2(102, 461)
+dialogue = ExtResource("18_u8pi1")
+
+[node name="Label2" type="Label" parent="NPC2"]
+offset_left = -19.0
+offset_top = -69.0
+offset_right = 21.0
+offset_bottom = -46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "厨子"

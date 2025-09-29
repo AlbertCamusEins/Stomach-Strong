@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvtwcxxlvg3g2"]
+
+[ext_resource type="Script" uid="uid://dv3h0sgb04iki" path="res://Scripts/EncounterEntity.gd" id="1_p1ho4"]
+[ext_resource type="Texture2D" uid="uid://dftbbs3qwyegw" path="res://Assets/rabnail.png" id="2_p1ho4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elnf2"]
+size = Vector2(30, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elnf2"]
+radius = 22.0
+
+[node name="EncounterEntity" type="CharacterBody2D"]
+script = ExtResource("1_p1ho4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_p1ho4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_elnf2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_elnf2")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://drvnnvgwisjwr"]
+
+[ext_resource type="Script" uid="uid://bewxhhh8w4mdb" path="res://Scripts/MainMenu.gd" id="1_tt5f1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tt5f1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 200.0
+offset_right = 1040.0
+offset_bottom = 600.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "吃货传说"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "继续游戏"
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "新游戏"

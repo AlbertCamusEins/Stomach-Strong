@@ -1,0 +1,277 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=56 format=3 uid="uid://fs7l0cm0i77b"]
+
+[ext_resource type="Script" uid="uid://cqen4escgn61p" path="res://Scripts/DialogueNode.gd" id="1_jdyj6"]
+[ext_resource type="Script" uid="uid://cbwlurgsbf1vj" path="res://Scripts/Dialogue.gd" id="1_xq7go"]
+[ext_resource type="Script" uid="uid://doalrnv4drogo" path="res://Scripts/DialogueLineNode.gd" id="2_lw3sk"]
+[ext_resource type="Script" uid="uid://cjn50xmp33i1" path="res://Scripts/DialogueConditionBranch.gd" id="3_b0j77"]
+[ext_resource type="Script" uid="uid://b3m3ucgaokfsy" path="res://Scripts/DialogueConditionFlag.gd" id="4_um5ff"]
+[ext_resource type="Script" uid="uid://hfwirf4xql02" path="res://Scripts/DialogueCondition.gd" id="4_w0424"]
+[ext_resource type="Script" uid="uid://dsbnxsitoaugv" path="res://Scripts/DialogueConditionQuestState.gd" id="5_604oq"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="6_ggo3o"]
+[ext_resource type="Script" uid="uid://lktdb8e40mdy" path="res://Scripts/DialogueConditionInventory.gd" id="7_tg37i"]
+[ext_resource type="Script" uid="uid://blxicb6tp05ca" path="res://Scripts/DialogueConditionNode.gd" id="8_8ieyy"]
+[ext_resource type="Script" uid="uid://xflqxhj5k5oy" path="res://Scripts/DialogueChoiceOption.gd" id="9_tg37i"]
+[ext_resource type="Script" uid="uid://c8tjaxs011780" path="res://Scripts/DialogueAction.gd" id="10_8ieyy"]
+[ext_resource type="Script" uid="uid://rdt38a20bb7t" path="res://Scripts/DialogueActionClearFlag.gd" id="11_3pm2r"]
+[ext_resource type="Resource" uid="uid://d0xrl1b1nem8" path="res://Resources/cook_apple_soup.tres" id="11_pdlja"]
+[ext_resource type="Script" uid="uid://bwqynoqqwqver" path="res://Scripts/DialogueActionStartQuest.gd" id="11_r1nau"]
+[ext_resource type="Script" uid="uid://cofbm4pug8q5s" path="res://Scripts/DialogueChoiceNode.gd" id="12_r1nau"]
+[ext_resource type="Script" uid="uid://ddajycott78g0" path="res://Scripts/DialogueActionNode.gd" id="13_8ieyy"]
+[ext_resource type="Script" uid="uid://wsalwsmr3t8t" path="res://Scripts/DialogueActionSetFlag.gd" id="13_um5ff"]
+[ext_resource type="Script" uid="uid://dxobsshr0pn35" path="res://Scripts/DialogueActionRemoveItem.gd" id="17_um5ff"]
+[ext_resource type="Script" uid="uid://oqnwymyswo05" path="res://Scripts/DialogueActionAdvanceObjective.gd" id="18_fiiwa"]
+
+[sub_resource type="Resource" id="Resource_rgjpi"]
+script = ExtResource("4_um5ff")
+flag_name = "chef_help"
+expected_value = true
+require_existence = true
+metadata/_custom_type_script = "uid://b3m3ucgaokfsy"
+
+[sub_resource type="Resource" id="Resource_uh6so"]
+script = ExtResource("3_b0j77")
+conditions = Array[ExtResource("4_w0424")]([SubResource("Resource_rgjpi")])
+next_id = "check_state"
+metadata/_custom_type_script = "uid://cjn50xmp33i1"
+
+[sub_resource type="Resource" id="Resource_sg7gg"]
+script = ExtResource("3_b0j77")
+conditions = Array[ExtResource("4_w0424")]([])
+next_id = "intro"
+metadata/_custom_type_script = "uid://cjn50xmp33i1"
+
+[sub_resource type="Resource" id="Resource_qsbvf"]
+script = ExtResource("8_8ieyy")
+branches = Array[ExtResource("3_b0j77")]([SubResource("Resource_uh6so"), SubResource("Resource_sg7gg")])
+fallback_next_id = ""
+node_id = "judge"
+next_id = ""
+metadata/_custom_type_script = "uid://blxicb6tp05ca"
+
+[sub_resource type="Resource" id="Resource_h68fc"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "新鲜的苹果汤就快好了，可是还差3个苹果"
+node_id = "intro"
+next_id = "check_state"
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_3pm2r"]
+script = ExtResource("5_604oq")
+quest_id = "cook_apple_soup"
+required_state = 2
+metadata/_custom_type_script = "uid://dsbnxsitoaugv"
+
+[sub_resource type="Resource" id="Resource_r1nau"]
+script = ExtResource("3_b0j77")
+conditions = Array[ExtResource("4_w0424")]([SubResource("Resource_3pm2r")])
+next_id = "after_finish"
+metadata/_custom_type_script = "uid://cjn50xmp33i1"
+
+[sub_resource type="Resource" id="Resource_um5ff"]
+script = ExtResource("7_tg37i")
+item = ExtResource("6_ggo3o")
+required_quantity = 3
+must_have = true
+metadata/_custom_type_script = "uid://lktdb8e40mdy"
+
+[sub_resource type="Resource" id="Resource_pdlja"]
+script = ExtResource("5_604oq")
+quest_id = "cook_apple_soup"
+required_state = 1
+metadata/_custom_type_script = "uid://dsbnxsitoaugv"
+
+[sub_resource type="Resource" id="Resource_vqt1m"]
+script = ExtResource("3_b0j77")
+conditions = Array[ExtResource("4_w0424")]([SubResource("Resource_um5ff"), SubResource("Resource_pdlja")])
+next_id = "ready_to_deliver"
+metadata/_custom_type_script = "uid://cjn50xmp33i1"
+
+[sub_resource type="Resource" id="Resource_b0j77"]
+script = ExtResource("5_604oq")
+quest_id = "cook_apple_soup"
+required_state = 1
+metadata/_custom_type_script = "uid://dsbnxsitoaugv"
+
+[sub_resource type="Resource" id="Resource_w0424"]
+script = ExtResource("3_b0j77")
+conditions = Array[ExtResource("4_w0424")]([SubResource("Resource_b0j77")])
+next_id = "still_collecting"
+metadata/_custom_type_script = "uid://cjn50xmp33i1"
+
+[sub_resource type="Resource" id="Resource_fiiwa"]
+script = ExtResource("8_8ieyy")
+branches = Array[ExtResource("3_b0j77")]([SubResource("Resource_r1nau"), SubResource("Resource_vqt1m"), SubResource("Resource_w0424")])
+fallback_next_id = "offer_quest"
+node_id = "check_state"
+next_id = ""
+metadata/_custom_type_script = "uid://blxicb6tp05ca"
+
+[sub_resource type="Resource" id="Resource_ghbal"]
+script = ExtResource("11_r1nau")
+quest = ExtResource("11_pdlja")
+metadata/_custom_type_script = "uid://bwqynoqqwqver"
+
+[sub_resource type="Resource" id="Resource_ogpop"]
+script = ExtResource("13_um5ff")
+flag_name = "chef_help"
+value = true
+metadata/_custom_type_script = "uid://wsalwsmr3t8t"
+
+[sub_resource type="Resource" id="Resource_g6dml"]
+script = ExtResource("9_tg37i")
+text = "当然可以"
+next_id = "accepted"
+conditions = Array[ExtResource("4_w0424")]([])
+actions = Array[ExtResource("10_8ieyy")]([SubResource("Resource_ghbal"), SubResource("Resource_ogpop")])
+metadata/_custom_type_script = "uid://xflqxhj5k5oy"
+
+[sub_resource type="Resource" id="Resource_5asg6"]
+script = ExtResource("11_3pm2r")
+flag_name = "chef_help"
+metadata/_custom_type_script = "uid://rdt38a20bb7t"
+
+[sub_resource type="Resource" id="Resource_mu2l2"]
+script = ExtResource("9_tg37i")
+text = "抱歉，没空"
+next_id = "declined"
+conditions = Array[ExtResource("4_w0424")]([])
+actions = Array[ExtResource("10_8ieyy")]([SubResource("Resource_5asg6")])
+metadata/_custom_type_script = "uid://xflqxhj5k5oy"
+
+[sub_resource type="Resource" id="Resource_jdqe7"]
+script = ExtResource("12_r1nau")
+prompt = "你愿意帮忙吗？"
+choices = Array[ExtResource("9_tg37i")]([SubResource("Resource_g6dml"), SubResource("Resource_mu2l2")])
+node_id = "offer_quest"
+next_id = ""
+metadata/_custom_type_script = "uid://cofbm4pug8q5s"
+
+[sub_resource type="Resource" id="Resource_tg37i"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "嘿嘿，找到冤大头帮我了"
+node_id = "accepted"
+next_id = "tucao"
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_8ieyy"]
+script = ExtResource("2_lw3sk")
+speaker = "玩家"
+text = "你特么……"
+node_id = "tucao"
+next_id = ""
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_xbjn3"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "不帮就不帮，爷自己去找"
+node_id = "declined"
+next_id = ""
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_mqaj0"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "活干的怎么样了？让我看看你的包"
+node_id = "still_collecting"
+next_id = "apple_to_go"
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_o2yrv"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "苹果不够啊，我缺的营养这块谁给我补上啊？"
+node_id = "apple_to_go"
+next_id = ""
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_lragp"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "我闻到苹果味了，拿来吧你！"
+node_id = "ready_to_deliver"
+next_id = "deliver"
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_28m6i"]
+script = ExtResource("17_um5ff")
+item = ExtResource("6_ggo3o")
+quantity = 3
+metadata/_custom_type_script = "uid://dxobsshr0pn35"
+
+[sub_resource type="Resource" id="Resource_l2stu"]
+script = ExtResource("7_tg37i")
+item = ExtResource("6_ggo3o")
+required_quantity = 3
+must_have = true
+metadata/_custom_type_script = "uid://lktdb8e40mdy"
+
+[sub_resource type="Resource" id="Resource_pdsl0"]
+script = ExtResource("9_tg37i")
+text = "给你！"
+next_id = "turn_in"
+conditions = Array[ExtResource("4_w0424")]([SubResource("Resource_l2stu")])
+actions = Array[ExtResource("10_8ieyy")]([SubResource("Resource_28m6i")])
+metadata/_custom_type_script = "uid://xflqxhj5k5oy"
+
+[sub_resource type="Resource" id="Resource_i3cql"]
+script = ExtResource("9_tg37i")
+text = "不给！"
+next_id = ""
+conditions = Array[ExtResource("4_w0424")]([])
+actions = Array[ExtResource("10_8ieyy")]([])
+metadata/_custom_type_script = "uid://xflqxhj5k5oy"
+
+[sub_resource type="Resource" id="Resource_3ml1e"]
+script = ExtResource("12_r1nau")
+prompt = "上交苹果？"
+choices = Array[ExtResource("9_tg37i")]([SubResource("Resource_pdsl0"), SubResource("Resource_i3cql")])
+node_id = "deliver"
+next_id = ""
+metadata/_custom_type_script = "uid://cofbm4pug8q5s"
+
+[sub_resource type="Resource" id="Resource_ymamr"]
+script = ExtResource("2_lw3sk")
+speaker = "厨师"
+text = "等着，汤马上就好"
+node_id = "turn_in"
+next_id = "complete_quest"
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[sub_resource type="Resource" id="Resource_3cm7d"]
+script = ExtResource("18_fiiwa")
+quest_id = "cook_apple_soup"
+objective_index = 0
+progress = 1
+mark_complete = true
+metadata/_custom_type_script = "uid://oqnwymyswo05"
+
+[sub_resource type="Resource" id="Resource_nayrd"]
+script = ExtResource("11_3pm2r")
+flag_name = ""
+metadata/_custom_type_script = "uid://rdt38a20bb7t"
+
+[sub_resource type="Resource" id="Resource_mkjb3"]
+script = ExtResource("13_8ieyy")
+actions = Array[ExtResource("10_8ieyy")]([SubResource("Resource_3cm7d"), SubResource("Resource_nayrd")])
+node_id = "complete_quest"
+next_id = "result"
+metadata/_custom_type_script = "uid://ddajycott78g0"
+
+[sub_resource type="Resource" id="Resource_5vvct"]
+script = ExtResource("2_lw3sk")
+speaker = ""
+text = "完成了任务！"
+node_id = "result"
+next_id = ""
+metadata/_custom_type_script = "uid://doalrnv4drogo"
+
+[resource]
+script = ExtResource("1_xq7go")
+dialogue_lines = Array[Dictionary]([])
+start_node_id = "judge"
+nodes = Array[ExtResource("1_jdyj6")]([SubResource("Resource_qsbvf"), SubResource("Resource_h68fc"), SubResource("Resource_fiiwa"), SubResource("Resource_jdqe7"), SubResource("Resource_tg37i"), SubResource("Resource_8ieyy"), SubResource("Resource_xbjn3"), SubResource("Resource_mqaj0"), SubResource("Resource_o2yrv"), SubResource("Resource_lragp"), SubResource("Resource_3ml1e"), SubResource("Resource_ymamr"), SubResource("Resource_mkjb3"), SubResource("Resource_5vvct")])
+quest_to_start = ExtResource("11_pdlja")
+metadata/_custom_type_script = "uid://cbwlurgsbf1vj"

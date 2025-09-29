@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://xy2uan8h7iw1"]
+
+[ext_resource type="PackedScene" uid="uid://e88icu8u6fn1" path="res://UI/VictoryPanel.tscn" id="2_1otgo"]
+[ext_resource type="PackedScene" uid="uid://dicq0iqky2qac" path="res://UI/battle_ui.tscn" id="2_oxf17"]
+[ext_resource type="Script" uid="uid://cmy0y0n52ftj4" path="res://Scripts/BattleManager.gd" id="3_1ruyk"]
+[ext_resource type="PackedScene" uid="uid://ddr41ju6ey8de" path="res://Scenes/Combatant.tscn" id="8_qeyqd"]
+
+[node name="Battle" type="Node2D"]
+
+[node name="PlayerSpawnPoints" type="Node2D" parent="."]
+
+[node name="EnemySpawnPoints" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_right = 1277.0
+offset_bottom = 804.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BattleUI" parent="CanvasLayer" instance=ExtResource("2_oxf17")]
+
+[node name="VictoryPanel" parent="CanvasLayer" instance=ExtResource("2_1otgo")]
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("3_1ruyk")
+combatant_scene = ExtResource("8_qeyqd")
+
+[node name="EnemyTurnTimer" type="Timer" parent="BattleManager"]
+one_shot = true

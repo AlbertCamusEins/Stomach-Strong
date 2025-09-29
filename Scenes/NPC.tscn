@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpv72e52rgi2"]
+
+[ext_resource type="Script" uid="uid://d02whbvqxwm3c" path="res://Scripts/NPC.gd" id="1_fo5tq"]
+[ext_resource type="Texture2D" uid="uid://bj2wapovm6nlm" path="res://icon.svg" id="1_tdvfm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fo5tq"]
+radius = 22.0907
+
+[node name="NPC" type="Area2D"]
+script = ExtResource("1_fo5tq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("1_tdvfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fo5tq")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -48.0
+offset_right = 30.0
+offset_bottom = -25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "按E交流"

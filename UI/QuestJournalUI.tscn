@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhn0ey82rjjr6"]
+
+[ext_resource type="Script" uid="uid://dfy2so3p4qll5" path="res://Scripts/QuestJournalUI.gd" id="1_3p2ym"]
+
+[node name="QuestJournalUI" type="CanvasLayer"]
+script = ExtResource("1_3p2ym")
+
+[node name="MainPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="QuestListPanel" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/QuestListPanel"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/MarginContainer/HBoxContainer/QuestListPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestList" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer/QuestListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DetailPanel" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="QuestNameLabel" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+
+[node name="QuestDescriptionLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator" type="Node2D" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+
+[node name="ObjectivesTitle" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+
+[node name="ObjectivesList" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3

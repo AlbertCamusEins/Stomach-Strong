@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=4 format=3 uid="uid://dve60r0fuq10f"]
+
+[ext_resource type="Script" uid="uid://cbwlurgsbf1vj" path="res://Scripts/Dialogue.gd" id="1_jqr6n"]
+[ext_resource type="Script" uid="uid://cqen4escgn61p" path="res://Scripts/DialogueNode.gd" id="1_vlddo"]
+[ext_resource type="Resource" uid="uid://scneirkwsmle" path="res://Resources/village_chief_quest.tres" id="1_vn1t6"]
+
+[resource]
+script = ExtResource("1_jqr6n")
+dialogue_lines = Array[Dictionary]([{
+"speaker": "村长",
+"text": "欢迎你，年轻人"
+}, {
+"speaker": "玩家",
+"text": "你谁啊？"
+}])
+start_node_id = ""
+nodes = Array[ExtResource("1_vlddo")]([])
+quest_to_start = ExtResource("1_vn1t6")
+metadata/_custom_type_script = "uid://cbwlurgsbf1vj"

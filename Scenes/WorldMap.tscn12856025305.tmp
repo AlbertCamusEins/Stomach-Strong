@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv8nwk1opdjlw"]
+
+[ext_resource type="PackedScene" uid="uid://4y05vc33l6jx" path="res://Scenes/Character.tscn" id="1_h0vor"]
+[ext_resource type="Script" uid="uid://cum21nkxacfyc" path="res://Scripts/WorldMap.gd" id="1_lgebn"]
+[ext_resource type="Texture2D" uid="uid://bj2wapovm6nlm" path="res://icon.svg" id="3_5wnfc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0vor"]
+radius = 64.2806
+
+[node name="WorldMap" type="Node2D"]
+script = ExtResource("1_lgebn")
+
+[node name="Character" parent="." instance=ExtResource("1_h0vor")]
+position = Vector2(627, 391)
+
+[node name="EncounterArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterArea"]
+position = Vector2(913, 255)
+shape = SubResource("CircleShape2D_h0vor")
+
+[node name="Sprite2D" type="Sprite2D" parent="EncounterArea"]
+position = Vector2(912, 257)
+scale = Vector2(0.6875, 0.6875)
+texture = ExtResource("3_5wnfc")
+
+[connection signal="body_entered" from="EncounterArea" to="." method="_on_encounter_area_body_entered"]

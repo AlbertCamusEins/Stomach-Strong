@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://dnexvp1tyr0oc"]
+
+[ext_resource type="Script" uid="uid://b7igb0rd16158" path="res://Scripts/CookwareComponent.gd" id="1_4u2rl"]
+[ext_resource type="Script" uid="uid://bnse1gxc5flwh" path="res://Scripts/EquipmentComponent.gd" id="2_kongw"]
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="3_djdor"]
+
+[sub_resource type="Resource" id="Resource_4kgo1"]
+script = ExtResource("1_4u2rl")
+weight = null
+metadata/_custom_type_script = "uid://b7igb0rd16158"
+
+[sub_resource type="Resource" id="Resource_sesxb"]
+script = ExtResource("2_kongw")
+slot = 0
+max_health = 0
+max_satiety = 0
+max_mana = 0
+attack = 7
+defense = 0
+base_speed = 0
+food_effect = ""
+skill_power = 0
+metadata/_custom_type_script = "uid://bnse1gxc5flwh"
+
+[resource]
+script = ExtResource("3_djdor")
+item_name = "frying pan"
+description = "a frying pan. hit hard."
+equipment_props = SubResource("Resource_sesxb")
+cookware_props = SubResource("Resource_4kgo1")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

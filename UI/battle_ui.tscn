@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://dicq0iqky2qac"]
+
+[ext_resource type="Script" uid="uid://8vxlwhpx4872" path="res://Scripts/BattleUI.gd" id="1_1bs4s"]
+[ext_resource type="PackedScene" uid="uid://bvn6v43ir87x7" path="res://UI/item_menu.tscn" id="2_8l2n4"]
+[ext_resource type="PackedScene" uid="uid://ee5hgxahj0db" path="res://UI/StatusDisplay.tscn" id="2_c8pq4"]
+[ext_resource type="PackedScene" uid="uid://devl02x21np07" path="res://UI/skill_menu.tscn" id="3_pihlp"]
+[ext_resource type="PackedScene" uid="uid://efamq5p1egb7" path="res://UI/TargetSelector.tscn" id="3_xea3q"]
+
+[node name="BattleUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1bs4s")
+status_display_scene = ExtResource("2_c8pq4")
+target_selector_scene = ExtResource("3_xea3q")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1277.0
+offset_bottom = 798.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="EnemyStatusContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PlayerStatusContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="BattleLog" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionMenu" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ActionMenu"]
+layout_mode = 2
+
+[node name="AttackButton" type="Button" parent="MarginContainer/VBoxContainer/ActionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack"
+
+[node name="SkillButton" type="Button" parent="MarginContainer/VBoxContainer/ActionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="ItemButton" type="Button" parent="MarginContainer/VBoxContainer/ActionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item"
+
+[node name="DefendButton" type="Button" parent="MarginContainer/VBoxContainer/ActionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defend"
+
+[node name="ItemMenu" parent="." instance=ExtResource("2_8l2n4")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 200.0
+offset_right = 790.0
+offset_bottom = 600.0
+
+[node name="SkillMenu" parent="." instance=ExtResource("3_pihlp")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 200.0
+offset_right = 790.0
+offset_bottom = 600.0

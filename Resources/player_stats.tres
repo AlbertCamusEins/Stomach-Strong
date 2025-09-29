@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://d28mcqx356ynn"]
+
+[ext_resource type="Script" uid="uid://c765f0pc66pmw" path="res://Scripts/CharacterStats.gd" id="1_1kv1s"]
+[ext_resource type="Script" uid="uid://mpuepqpgye8m" path="res://Scripts/Skill.gd" id="2_f28lj"]
+[ext_resource type="Resource" uid="uid://d23ck5kwwe8l0" path="res://Resources/power_strike.tres" id="3_01cwn"]
+
+[resource]
+script = ExtResource("1_1kv1s")
+base_max_health = 100
+base_max_satiety = 100
+base_max_mana = 50
+base_attack = 10
+base_defense = 5
+base_speed = 10
+current_health = 50
+current_satiety = 50
+current_mana = 50
+max_health = 100
+max_satiety = 100
+max_mana = 50
+attack = 10
+defense = 5
+speed = 10
+skills = Array[ExtResource("2_f28lj")]([ExtResource("3_01cwn")])
+metadata/_custom_type_script = "uid://c765f0pc66pmw"

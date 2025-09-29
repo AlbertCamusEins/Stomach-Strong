@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://d0xrl1b1nem8"]
+
+[ext_resource type="Resource" uid="uid://c20k3kgf3o340" path="res://Resources/banana.tres" id="2_c63hs"]
+[ext_resource type="Script" uid="uid://blxnhcet27kn1" path="res://Scripts/QuestObjective.gd" id="2_dpsvw"]
+[ext_resource type="Script" uid="uid://csot8alkgvdoo" path="res://Scripts/Quest.gd" id="3_c63hs"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="4_wwdyk"]
+
+[sub_resource type="Resource" id="Resource_p6pko"]
+script = ExtResource("2_dpsvw")
+type = 0
+description = "帮厨子收集3个苹果"
+item_to_collect = ExtResource("4_wwdyk")
+collect_quantity = 3
+defeat_quantity = 1
+npc_id_to_talk = ""
+current_progress = 0
+is_complete = false
+metadata/_custom_type_script = "uid://blxnhcet27kn1"
+
+[resource]
+script = ExtResource("3_c63hs")
+quest_id = "cook_apple_soup"
+quest_name = "煮苹果汤"
+description = "帮厨子收集食材煮苹果汤"
+objectives = Array[ExtResource("2_dpsvw")]([SubResource("Resource_p6pko")])
+item_rewards = {
+ExtResource("2_c63hs"): 1
+}
+metadata/_custom_type_script = "uid://csot8alkgvdoo"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddr41ju6ey8de"]
+
+[ext_resource type="Script" uid="uid://boq43m3ty7ngc" path="res://Scripts/Combatant.gd" id="1_amgnx"]
+[ext_resource type="Texture2D" uid="uid://bj2wapovm6nlm" path="res://icon.svg" id="2_k73k6"]
+
+[node name="Combatant" type="Node2D"]
+script = ExtResource("1_amgnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k73k6")

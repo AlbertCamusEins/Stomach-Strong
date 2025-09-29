@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1oai7yh2v8b"]
+
+[ext_resource type="Script" uid="uid://d11d8usx1px7b" path="res://Scripts/CookingSpot.gd" id="1_5jvkc"]
+[ext_resource type="Texture2D" uid="uid://bj2wapovm6nlm" path="res://icon.svg" id="1_svb0w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5jvkc"]
+radius = 24.0
+
+[node name="CookingSpot" type="Area2D"]
+script = ExtResource("1_5jvkc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.255, 0.255)
+texture = ExtResource("1_svb0w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5jvkc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -38.0
+offset_top = -42.0
+offset_right = 44.0
+offset_bottom = -24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "炊点，按E交互"

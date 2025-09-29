@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CookingTechnique" load_steps=2 format=3 uid="uid://f4jlg0svitco"]
+
+[ext_resource type="Script" uid="uid://d2fm2g2isg1k6" path="res://Scripts/CookingTechnique.gd" id="1_e50dp"]
+
+[resource]
+script = ExtResource("1_e50dp")
+technique_name = "stewing"
+description = "stew a few ingredients in a pool of water or so."
+metadata/_custom_type_script = "uid://d2fm2g2isg1k6"

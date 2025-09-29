@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://bylyjbc8mqhuf"]
+
+[ext_resource type="Script" uid="uid://okyof124ghjx" path="res://Scripts/CookingUI.gd" id="1_3owuc"]
+
+[node name="CookingUi" type="CanvasLayer"]
+script = ExtResource("1_3owuc")
+
+[node name="MainPanel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="RecipeListPanel" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/RecipeListPanel"]
+layout_mode = 2
+text = "菜谱列表"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/MarginContainer/HBoxContainer/RecipeListPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipeList" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer/RecipeListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DetailPanel" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="RecipeName" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+text = "红烧肉"
+
+[node name="RecipeDescription" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+text = "一碗红烧肉"
+
+[node name="RequirementsPanel" type="PanelContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel"]
+layout_mode = 2
+
+[node name="IngredientsTitle" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+text = "所需食材"
+
+[node name="IngredientsGrid" type="GridContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="TechniqueTitle" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+text = "所需厨艺"
+
+[node name="TechniqueLabel" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+text = "炖煮"
+
+[node name="CookwareTitle" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+text = "所需厨具"
+
+[node name="CookwareLabel" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/RequirementsPanel/VBoxContainer"]
+layout_mode = 2
+text = "铁锅"
+
+[node name="OutputPanel" type="PanelContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/OutputPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/OutputPanel/HBoxContainer"]
+layout_mode = 2
+text = "产出"
+
+[node name="OutputLabel" type="Label" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel/OutputPanel/HBoxContainer"]
+layout_mode = 2
+text = "红烧肉"
+
+[node name="CookButton" type="Button" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+text = "制作"
+
+[node name="CloseButton" type="Button" parent="MainPanel/MarginContainer/HBoxContainer/DetailPanel"]
+layout_mode = 2
+text = "关闭"

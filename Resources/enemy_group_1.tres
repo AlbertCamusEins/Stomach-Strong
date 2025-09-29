@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=5 format=3 uid="uid://j4v36lmn88u4"]
+
+[ext_resource type="Script" uid="uid://bh7f0ms8tdo05" path="res://Scripts/CharacterData.gd" id="1_d5ded"]
+[ext_resource type="Resource" uid="uid://dlhjjw1pbye6v" path="res://Resources/enemy_1.tres" id="2_2p7v6"]
+[ext_resource type="Script" uid="uid://br0a3v426teeu" path="res://Scripts/Encounter.gd" id="2_teft1"]
+[ext_resource type="Resource" uid="uid://cchu2ghcbhess" path="res://Resources/enemy_2.tres" id="3_2p7v6"]
+
+[resource]
+script = ExtResource("2_teft1")
+enemies = Array[ExtResource("1_d5ded")]([ExtResource("2_2p7v6"), ExtResource("3_2p7v6")])
+metadata/_custom_type_script = "uid://br0a3v426teeu"
