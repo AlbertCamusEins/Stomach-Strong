@@ -1,4 +1,4 @@
-﻿# scripts/DialogueCondition.gd
+# scripts/DialogueCondition.gd
 @tool
 class_name DialogueCondition
 extends Resource

@@ -1,4 +1,4 @@
-﻿# scripts/DialogueLineNode.gd
+# scripts/DialogueLineNode.gd
 @tool
 class_name DialogueLineNode
 extends DialogueNode

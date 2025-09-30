@@ -1,4 +1,4 @@
-﻿# scripts/DialogueConditionNode.gd
+# scripts/DialogueConditionNode.gd
 @tool
 class_name DialogueConditionNode
 extends DialogueNode

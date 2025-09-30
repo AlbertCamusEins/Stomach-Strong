@@ -267,7 +267,9 @@ func _update_inventory_display() -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.tooltip_text = item.description
 
-		if can_equip and item.equipment_props:
+		var is_equipment := item.equipment_props != null
+		var is_consumable := item.consumable_props != null
+		if can_equip and (is_equipment or is_consumable):
 			button.disabled = false
 			button.pressed.connect(_on_inventory_item_clicked.bind(item))
 		else:
@@ -283,11 +285,54 @@ func _on_equipment_slot_clicked(slot_enum: EquipmentComponent.EquipmentSlot) -> 
 	_update_inventory_display()
 
 func _on_inventory_item_clicked(item: Item) -> void:
-	if selected_character_id.is_empty():
+	if selected_character_id.is_empty() or not item:
 		return
-	GameManager.equip_item_for_character(selected_character_id, item)
-	refresh_selected_character()
-	_update_inventory_display()
+	if not GameManager.all_characters.has(selected_character_id):
+		return
+	var character: CharacterData = GameManager.all_characters[selected_character_id]
+	if not character:
+		return
+
+	if item.equipment_props:
+		GameManager.equip_item_for_character(selected_character_id, item)
+		refresh_selected_character()
+		_update_inventory_display()
+		return
+
+	if item.consumable_props and character.stats:
+		var stats := character.stats
+		var props := item.consumable_props
+		if props.health_change != 0:
+			if props.health_change > 0:
+				stats.heal(props.health_change)
+			else:
+				stats.take_damage(-props.health_change, 1.0)
+		if props.mana_change != 0:
+			stats.change_mana(props.mana_change)
+		if props.satiety_change != 0:
+			stats.change_satiety(props.satiety_change)
+
+		if props.add_max_health != 0:
+			stats.base_max_health += props.add_max_health
+		if props.add_max_satiety != 0:
+			stats.base_max_satiety += props.add_max_satiety
+		if props.add_max_mana != 0:
+			stats.base_max_mana += props.add_max_mana
+		if props.add_attack != 0:
+			stats.base_attack += props.add_attack
+		if props.add_defense != 0:
+			stats.base_defense += props.add_defense
+		if props.add_base_speed != 0:
+			stats.base_speed += props.add_base_speed
+
+		GameManager.calculate_total_stats(selected_character_id)
+		stats.current_health = clamp(stats.current_health, 0, stats.max_health)
+		stats.current_mana = clamp(stats.current_mana, 0, stats.max_mana)
+		stats.current_satiety = clamp(stats.current_satiety, 0, stats.max_satiety)
+		GameManager.remove_item(item, 1)
+		refresh_selected_character()
+		_update_inventory_display()
+		return
 
 func _clear_portrait() -> void:
 	for child in portrait_container.get_children():

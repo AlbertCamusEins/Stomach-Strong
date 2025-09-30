@@ -1,4 +1,4 @@
-﻿# scripts/WorldMap.gd
+# scripts/WorldMap.gd
 extends Node2D
 
 # --- 节点引用 ---

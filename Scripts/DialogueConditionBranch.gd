@@ -1,4 +1,4 @@
-﻿# scripts/DialogueConditionBranch.gd
+# scripts/DialogueConditionBranch.gd
 @tool
 class_name DialogueConditionBranch
 extends Resource

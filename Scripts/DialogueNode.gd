@@ -1,4 +1,4 @@
-﻿# scripts/DialogueNode.gd
+# scripts/DialogueNode.gd
 @tool
 class_name DialogueNode
 extends Resource

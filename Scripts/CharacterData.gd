@@ -1,4 +1,4 @@
-﻿# scripts/CharacterData.gd
+# scripts/CharacterData.gd
 # 代表一个独一无二的、可加入队伍的角色实体
 @tool
 class_name CharacterData extends Resource

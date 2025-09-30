@@ -1,4 +1,4 @@
-﻿# scripts/DialogueAction.gd
+# scripts/DialogueAction.gd
 @tool
 class_name DialogueAction
 extends Resource

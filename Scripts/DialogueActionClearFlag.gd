@@ -1,4 +1,4 @@
-﻿# scripts/DialogueActionClearFlag.gd
+# scripts/DialogueActionClearFlag.gd
 @tool
 class_name DialogueActionClearFlag
 extends DialogueAction

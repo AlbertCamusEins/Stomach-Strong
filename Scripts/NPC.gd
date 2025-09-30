@@ -1,4 +1,4 @@
-﻿# scripts/NPC.gd
+# scripts/NPC.gd
 class_name NPC extends Area2D
 
 # 当玩家与 NPC 互动时发出信号，传递对话资源和 NPC 实体

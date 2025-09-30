@@ -1,4 +1,4 @@
-﻿# scripts/SaveData.gd
+# scripts/SaveData.gd
 # 这个资源就像一个“集装箱”，用来打包所有需要存档的游戏数据。
 class_name SaveData extends Resource
 
