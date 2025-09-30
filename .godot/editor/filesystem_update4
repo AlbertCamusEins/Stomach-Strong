@@ -1,4 +1,4 @@
-res://UI/PlayerMenu.tscn
+res://Scenes/WorldMap.tscn
 res://Scripts/GameManager.gd
 res://Resources/power_strike.tres
 res://Resources/player_stats.tres
@@ -19,4 +19,10 @@ res://Resources/enemy_1.tres
 res://Resources/enemy_group_1.tres
 res://Resources/cook_apple_soup.tres
 res://Resources/chef_dialogue.tres
+res://Scenes/battle.tscn
+res://Scenes/NPC.tscn
+res://UI/battle_ui.tscn
+res://UI/PlayerMenu.tscn
+res://UI/PartyScreen.tscn
 res://Scripts/PlayerMenu.gd
+res://UI/StatusScreen.tscn

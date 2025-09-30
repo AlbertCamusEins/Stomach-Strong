@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://4y05vc33l6jx" path="res://Scenes/Character.tscn" id="1_h0vor"]
 [ext_resource type="Script" uid="uid://cum21nkxacfyc" path="res://Scripts/WorldMap.gd" id="1_lgebn"]
-[ext_resource type="Resource" uid="uid://qx5b2bjymeub" path="res://Resources/enemy_stats.tres" id="2_nnt0k"]
 [ext_resource type="PackedScene" uid="uid://bytpvx8hadc10" path="res://Scenes/MapTest.tscn" id="4_ymbeh"]
 [ext_resource type="PackedScene" uid="uid://daift07xjfewj" path="res://UI/StatusScreen.tscn" id="5_ovel5"]
 [ext_resource type="PackedScene" uid="uid://c1oai7yh2v8b" path="res://Scenes/CookingSpot.tscn" id="6_6g17r"]
@@ -18,11 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://cvtwcxxlvg3g2" path="res://Scenes/EncounterEntity.tscn" id="15_y6rwo"]
 [ext_resource type="Resource" uid="uid://j4v36lmn88u4" path="res://Resources/enemy_group_1.tres" id="16_y6rwo"]
 [ext_resource type="Resource" uid="uid://fs7l0cm0i77b" path="res://Resources/chef_dialogue.tres" id="18_u8pi1"]
+[ext_resource type="PackedScene" uid="uid://mjrdj64swlve" path="res://UI/PlayerMenu.tscn" id="18_yndps"]
 
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_lgebn")
-enemy_in_area = ExtResource("2_nnt0k")
-encounter_in_area = ExtResource("16_y6rwo")
 
 [node name="MapTest" parent="." instance=ExtResource("4_ymbeh")]
 
@@ -78,3 +76,5 @@ offset_right = 21.0
 offset_bottom = -46.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "厨子"
+
+[node name="PlayerMenu" parent="." instance=ExtResource("18_yndps")]
