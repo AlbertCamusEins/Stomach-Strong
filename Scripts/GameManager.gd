@@ -243,7 +243,7 @@ func save_game():
 	var equipment_snapshot: Dictionary = {}
 	for char_id in equipment_by_character.keys():
 		var equipment: Dictionary = equipment_by_character[char_id]
-		equipment_snapshot[char_id] = equipment.duplicate() if equipment else {}
+		equipment_snapshot[char_id] = _clone_equipment_dict(equipment)
 		_sync_character_equipped_slots(char_id, equipment)
 	save_data.equipment_by_character = equipment_snapshot
 
@@ -391,7 +391,7 @@ func _sync_character_equipped_slots(character_id: String, equipment: Dictionary)
 		return
 	var character_data: CharacterData = all_characters[character_id]
 	if character_data:
-		character_data.equipped_slots = equipment.duplicate() if equipment else {}
+		character_data.equipped_slots = _clone_equipment_dict(equipment)
 
 func _register_character_equipment(character_data: CharacterData) -> void:
 	if not character_data:

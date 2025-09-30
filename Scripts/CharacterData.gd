@@ -9,6 +9,9 @@ class_name CharacterData extends Resource
 # 角色的名字
 @export var character_name: String
 
+# 角色在界面中使用的立绘
+@export var portrait: Texture2D
+
 # 这个角色当前的所有属性状态
 # 每个角色都拥有自己独立的 CharacterStats 实例
 @export var stats: CharacterStats

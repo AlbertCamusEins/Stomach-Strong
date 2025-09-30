@@ -1,8 +1,8 @@
-GridContainer
 VBoxContainer
+Label
+GridContainer
 HBoxContainer
 PanelContainer
-Label
 Button
 MarginContainer
 CanvasLayer

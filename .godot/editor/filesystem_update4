@@ -26,3 +26,5 @@ res://UI/PlayerMenu.tscn
 res://UI/PartyScreen.tscn
 res://Scripts/PlayerMenu.gd
 res://UI/StatusScreen.tscn
+res://Scripts/CharacterData.gd
+res://Resources/zelda.tres

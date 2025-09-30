@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://dtfnu1nldjhc0"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://dtfnu1nldjhc0"]
 
 [ext_resource type="Script" uid="uid://bh7f0ms8tdo05" path="res://Scripts/CharacterData.gd" id="1_b3nra"]
+[ext_resource type="Script" uid="uid://etw17btwd6j1" path="res://Scripts/InventorySlot.gd" id="1_b4708"]
 [ext_resource type="Resource" uid="uid://d28mcqx356ynn" path="res://Resources/player_stats.tres" id="2_jlwou"]
 
 [resource]
@@ -8,4 +9,6 @@ script = ExtResource("1_b3nra")
 character_id = "10001000"
 character_name = "Zelda"
 stats = ExtResource("2_jlwou")
+equipped_slots = {}
+loot_drops = Array[ExtResource("1_b4708")]([])
 metadata/_custom_type_script = "uid://bh7f0ms8tdo05"
