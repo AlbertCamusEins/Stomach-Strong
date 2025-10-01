@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=5 format=3 uid="uid://dtdg1ypue7n2b"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=7 format=3 uid="uid://dtdg1ypue7n2b"]
 
 [ext_resource type="Script" uid="uid://c765f0pc66pmw" path="res://Scripts/CharacterStats.gd" id="1_dejpr"]
 [ext_resource type="Script" uid="uid://mpuepqpgye8m" path="res://Scripts/Skill.gd" id="2_end63"]
 [ext_resource type="Resource" uid="uid://d23ck5kwwe8l0" path="res://Resources/power_strike.tres" id="3_lm3de"]
 [ext_resource type="Resource" uid="uid://cv6yxrdpo6ngd" path="res://Resources/link_time.tres" id="4_lm3de"]
+[ext_resource type="Resource" uid="uid://dssajdq4m7h0h" path="res://Resources/cutting_edge.tres" id="5_am3lw"]
+[ext_resource type="Resource" uid="uid://4aykkr5pqohs" path="res://Resources/eat.tres" id="6_c24e5"]
 
 [resource]
 script = ExtResource("1_dejpr")
@@ -22,5 +24,5 @@ max_mana = 100
 attack = 10
 defense = 5
 speed = 10
-skills = Array[ExtResource("2_end63")]([ExtResource("3_lm3de"), ExtResource("4_lm3de")])
+skills = Array[ExtResource("2_end63")]([ExtResource("3_lm3de"), ExtResource("4_lm3de"), ExtResource("5_am3lw"), ExtResource("6_c24e5")])
 metadata/_custom_type_script = "uid://c765f0pc66pmw"

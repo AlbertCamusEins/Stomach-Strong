@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_pk6ra"]
 script = ExtResource("1_pk6ra")
+hot_swappable = true
 slot = 0
 max_health = 0
 max_satiety = 0

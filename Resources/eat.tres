@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://4aykkr5pqohs"]
+
+[ext_resource type="Script" uid="uid://mpuepqpgye8m" path="res://Scripts/Skill.gd" id="1_1coe2"]
+
+[resource]
+script = ExtResource("1_1coe2")
+skill_name = "eat"
+description = "A powerful skill."
+target_type = 0
+cost_type = 0
+cost = 10
+power = 20
+metadata/_custom_type_script = "uid://mpuepqpgye8m"

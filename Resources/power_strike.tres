@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_4ly0x")
-skill_name = "强力击"
+skill_name = "very very power strike"
 description = "消耗10点魔力，对单个敌人造成25点伤害"
 target_type = 0
 cost_type = 0

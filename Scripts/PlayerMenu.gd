@@ -6,7 +6,7 @@ const PORTRAIT_SIZE = Vector2(250, 400)
 @onready var adjust_button: Button = $"PanelContainer/MarginContainer/HBoxContainer/FormationPanel/AdjustButton"
 @onready var combat_party_grid: GridContainer = $"PanelContainer/MarginContainer/HBoxContainer/FormationPanel/CombatPartyPanel/CombatPartyGrid"
 @onready var reserve_party_grid: GridContainer = $"PanelContainer/MarginContainer/HBoxContainer/FormationPanel/ReservePartyPanel/ReservePartyGrid"
-@onready var character_name_label: Label = $PanelContainer/MarginContainer/HBoxContainer/DetailPanel/EquipmentPanel/PortraitAndEquipment/PortraitContainer/CharacterNameLabel
+@onready var character_name_label: Label = $PanelContainer/MarginContainer/HBoxContainer/DetailPanel/EquipmentPanel/CharacterNameLabel
 @onready var portrait_container: VBoxContainer = $"PanelContainer/MarginContainer/HBoxContainer/DetailPanel/EquipmentPanel/PortraitAndEquipment/PortraitContainer"
 @onready var equipment_grid: GridContainer = $"PanelContainer/MarginContainer/HBoxContainer/DetailPanel/EquipmentPanel/PortraitAndEquipment/EquipmentContainer/EquipmentGrid"
 @onready var stats_title_label: Label = $"PanelContainer/MarginContainer/HBoxContainer/DetailPanel/StatsPanel/HBoxContainer/StatsContainer/StatsTitle"
@@ -30,7 +30,7 @@ func _ready() -> void:
 	stats_title_label.text = "Stats"
 	inventory_title_label.text = "Inventory"
 	equipment_grid.columns = 2
-	skills_grid.columns = 2
+	skills_grid.columns = 1
 	stats_grid.columns = 2
 	adjust_button.pressed.connect(_on_adjust_button_pressed)
 	close_button.pressed.connect(close_menu)
@@ -234,6 +234,7 @@ func _update_stats_display(stats: CharacterStats) -> void:
 
 func _update_skills_display(stats: CharacterStats) -> void:
 	_clear_skills_grid()
+	print(skills_grid.columns)
 	if not stats or not stats.skills or stats.skills.is_empty():
 		var none_label := Label.new()
 		none_label.text = "No skills learned"
@@ -244,14 +245,9 @@ func _update_skills_display(stats: CharacterStats) -> void:
 	for skill in stats.skills:
 		if not (skill is Skill):
 			continue
-		var name_label := Label.new()
+		var name_label = Label.new()
 		name_label.text = skill.skill_name
 		skills_grid.add_child(name_label)
-
-		var details_label := Label.new()
-		details_label.text = _describe_skill(skill)
-		details_label.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		#skills_grid.add_child(details_label)
 
 func _update_inventory_display() -> void:
 	for child in inventory_grid.get_children():
