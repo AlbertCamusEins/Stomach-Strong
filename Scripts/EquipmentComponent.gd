@@ -8,7 +8,7 @@ enum EquipmentSlot {
 	LEGS,       # 腿部
 	ACCESSORY   # 饰品
 }
-
+@export var hot_swappable: bool = true
 @export var slot: EquipmentSlot
 
 @export_group("Stat Bonuses")

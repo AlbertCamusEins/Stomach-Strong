@@ -270,6 +270,8 @@ func connect_additional_ui_signals():
 	battle_ui.skill_pressed.connect(_on_player_skill)
 	battle_ui.food_item_selected.connect(_on_player_choose_item)
 	battle_ui.skill_selected.connect(_on_skill_chosen)
+	battle_ui.weapon_selected.connect(_on_player_choose_weapon)
+	# 战斗胜利界面信号
 	if not battle_ui.victory_loot_clicked.is_connected(_on_victory_loot_clicked):
 		battle_ui.victory_loot_clicked.connect(_on_victory_loot_clicked)
 	if not battle_ui.victory_confirmed.is_connected(_on_victory_confirmed):
@@ -279,12 +281,22 @@ func connect_additional_ui_signals():
 func _on_player_item():
 	if current_state != State.PLAYER_INPUT: return
 	# 收集可用的消耗品和武器（去重显示）
-	var items: Array[Item] = []
+	var food_slots: Array[InventorySlot] = []
+	var weapon_slots: Array[InventorySlot] = []
 	for slot in player_inventory:
-		if slot and slot.item and slot.item.consumable_props:
-			if not items.has(slot.item):
-				items.append(slot.item)
-	battle_ui.open_item_menu(items)
+		if not slot or not slot.item:
+			continue
+		if slot.quantity <= 0:
+			continue
+		var item = slot.item
+		if item.consumable_props:
+			food_slots.append(slot)
+			continue
+		if item.equipment_props and item.equipment_props.slot == EquipmentComponent.EquipmentSlot.WEAPON and item.equipment_props.hot_swappable:
+			# 只显示可热切换的武器
+			weapon_slots.append(slot)
+	var equipped_weapon = _get_equipped_weapon(current_actor)
+	battle_ui.open_item_menu(food_slots, weapon_slots, equipped_weapon)
 
 # 物品两阶段：先选物品，再选友方目标
 func _on_player_choose_item(food_item: Item):
@@ -299,15 +311,6 @@ func _on_player_choose_item(food_item: Item):
 		return
 	battle_ui.start_targeting(targets)
 	change_state(State.PLAYER_TARGETING)
-
-# 战斗中切换武器
-func _on_player_choose_weapon(weapon: Item):
-	if current_state != State.PLAYER_INPUT: return
-	var slot = weapon.equipment_props.slot
-	if not weapon or slot != EquipmentComponent.EquipmentSlot.WEAPON:
-		return
-	
-	
 
 # 打开技能菜单
 func _on_player_skill():
@@ -393,7 +396,7 @@ func _on_victory_confirmed() -> void:
 	pending_loot.clear()
 	GameManager.end_battle()
 
-# 技能消耗检�?结算
+# 技能消耗检查/结算辅助函数
 func _can_pay_skill_cost(user: Combatant, skill: Skill) -> bool:
 	match skill.cost_type:
 		Skill.CostType.MANA:
@@ -594,3 +597,65 @@ func _on_player_use_skill(skill: Skill):
 	battle_ui.update_all_statuses()
 	battle_ui.log_message("%s 使用技能 %s 攻击 %s！" % [attacker.name, skill.skill_name, target.name])
 	check_for_win_lose()
+
+func _on_player_choose_weapon(weapon: Item):
+	if current_state != State.PLAYER_INPUT:
+		return
+	if not weapon or not weapon.equipment_props:
+		return
+	var props := weapon.equipment_props
+	if props.slot != EquipmentComponent.EquipmentSlot.WEAPON:
+		return
+	if not props.hot_swappable:
+		battle_ui.log_message("%s 无法在战斗中更换。" % weapon.item_name)
+		return
+
+	if not current_actor or not current_actor.character_data:
+		battle_ui.log_message("无法切换武器：缺少角色数据")
+		return
+
+	var character_data: CharacterData = current_actor.character_data
+	var current_weapon := _get_equipped_weapon(current_actor)
+	if current_weapon == weapon:
+		battle_ui.log_message("%s 已装备 %s" % [current_actor.name, weapon.item_name])
+		return
+
+	var char_id := String(character_data.character_id)
+	var used_game_manager := false
+	if not char_id.is_empty() and GameManager.all_characters.has(char_id):
+		GameManager.equip_item_for_character(char_id, weapon)
+		used_game_manager = true
+	else:
+		_swap_weapon_for_combatant_only(character_data, weapon)
+
+	var equipment: Dictionary = GameManager.get_character_equipment(char_id, false) if used_game_manager else character_data.equipped_slots
+	if character_data.stats:
+		character_data.stats.update_equipment_bonuses(equipment)
+	current_actor.stats.update_equipment_bonuses(equipment)
+	battle_ui.update_all_statuses()
+	battle_ui.log_message("%s 切换为 %s" % [current_actor.name, weapon.item_name])
+	player_inventory = GameManager.player_current_inventory
+
+func _get_equipped_weapon(combatant: Combatant) -> Item:
+	if not combatant or not combatant.character_data:
+		return null
+	var equipment: Dictionary = combatant.character_data.equipped_slots if combatant.character_data.equipped_slots else {}
+	if equipment.has(EquipmentComponent.EquipmentSlot.WEAPON):
+		var weapon = equipment[EquipmentComponent.EquipmentSlot.WEAPON]
+		if weapon is Item:
+			return weapon
+	return null
+
+func _swap_weapon_for_combatant_only(character_data: CharacterData, new_weapon: Item) -> void:
+	if not character_data or not new_weapon:
+		return
+	var slot_enum = EquipmentComponent.EquipmentSlot.WEAPON
+	var equipment: Dictionary = character_data.equipped_slots if character_data.equipped_slots else {}
+	var previous_weapon: Item = null
+	if equipment.has(slot_enum):
+		previous_weapon = equipment[slot_enum]
+	GameManager.remove_item(new_weapon, 1)
+	equipment[slot_enum] = new_weapon
+	if previous_weapon:
+		GameManager.add_item(previous_weapon, 1)
+	character_data.equipped_slots = equipment

@@ -191,37 +191,58 @@ func _unhandled_input(event: InputEvent):
 	elif event.is_action_pressed("ui_cancel"):
 		cancel_targeting()
 
-# 根据传入的武器数组，动态创建按钮并填充到武器菜单
-func populate_weapon_grid(weapons: Array[Item]):
+# 根据传入的武器槽位，动态创建按钮并填充到武器菜单
+func populate_weapon_grid(weapon_slots: Array[InventorySlot], equipped_weapon: Item):
 	for child in weapon_grid.get_children():
 		child.queue_free()
 
-	for weapon in weapons:
+	if equipped_weapon:
+		var equipped_label = Label.new()
+		equipped_label.text = "当前武器: " + equipped_weapon.item_name
+		weapon_grid.add_child(equipped_label)
+
+	var has_other_weapons = false
+	for slot in weapon_slots:
+		if not slot or not slot.item:
+			continue
+		has_other_weapons = true
+		var weapon = slot.item
 		var button = Button.new()
 		button.text = weapon.item_name
+		if weapon.equipment_props and not weapon.equipment_props.hot_swappable:
+			button.disabled = true
+			button.text += " (不可热切)"
+		else:
+			button.pressed.connect(_on_weapon_button_pressed.bind(weapon))
+		weapon_grid.add_child(button)
 
 
 
 # 新增：根据传入的食物数组，动态创建按钮并填充到菜单中
-func populate_item_menu(food_items: Array[Item]):
+func populate_item_menu(food_slots: Array[InventorySlot]):
 	# 1. 先清空旧的按钮
 	for child in food_grid.get_children():
 		child.queue_free()
 	
 	# 2. 遍历食物数组，为每个食物创建一个新按钮
-	for item in food_items:
-		var button = Button.new()
-		button.text = item.item_name
-		# 关键：将按钮的 pressed 信号连接到一个处理函数上。
-		# bind() 方法可以让我们在连接信号时传递额外的参数（这里是 food 对象本身）。
-		button.pressed.connect(_on_food_button_pressed.bind(item))
-		food_grid.add_child(button)
+	for slot in food_slots:
+		if not slot or not slot.item:
+			continue
+		var food_item = slot.item
+		if food_item.consumable_props:
+			var button = Button.new()
+			button.text = "%s x%d" % [food_item.item_name, slot.quantity]
+			button.pressed.connect(_on_food_button_pressed.bind(food_item))
+			food_grid.add_child(button)
 
 # 新增：当动态创建的食物按钮被点击时调用
 func _on_food_button_pressed(food_item: Item):
 	emit_signal("food_item_selected", food_item)
 	item_menu.hide() # 选择后自动关闭菜单
 
+func _on_weapon_button_pressed(weapon: Item):
+	emit_signal("weapon_selected", weapon)
+	item_menu.hide() # 选择后自动关闭菜单
 
 func show_victory_screen(loot_data: Dictionary) -> void:
 	if is_targeting:
@@ -328,11 +349,12 @@ func _configure_row(row: HBoxContainer, separation: int, align: int) -> void:
 	row.add_theme_constant_override("separation", separation)
 
 # --- 菜单开关（供 BattleManager 调用） ---
-func open_item_menu(items: Array[Item]):
+func open_item_menu(food_slots: Array[InventorySlot], weapon_slots: Array[InventorySlot], equipped_weapon: Item):
 	if item_menu.visible:
 		item_menu.hide()
 		return
-	populate_item_menu(items)
+	populate_item_menu(food_slots)
+	populate_weapon_grid(weapon_slots, equipped_weapon)
 	item_menu.show()
 
 func open_skill_menu(skills: Array[Skill]):
