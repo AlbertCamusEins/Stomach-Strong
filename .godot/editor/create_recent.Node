@@ -1,3 +1,9 @@
+Timer
+CollisionShape2D
+Area2D
+CharacterBody2D
+AnimatedSprite2D
+Camera2D
 Label
 VBoxContainer
 GridContainer
@@ -7,8 +13,3 @@ Button
 MarginContainer
 CanvasLayer
 ScrollContainer
-AnimatedSprite2D
-TileMapLayer
-Sprite2D
-ProgressBar
-Node2D

@@ -234,7 +234,6 @@ func _update_stats_display(stats: CharacterStats) -> void:
 
 func _update_skills_display(stats: CharacterStats) -> void:
 	_clear_skills_grid()
-	print(skills_grid.columns)
 	if not stats or not stats.skills or stats.skills.is_empty():
 		var none_label := Label.new()
 		none_label.text = "No skills learned"

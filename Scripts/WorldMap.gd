@@ -5,7 +5,7 @@ extends Node2D
 # 引用烹饪UI
 @onready var cooking_ui: CanvasLayer = $CookingUi
 # 引用玩家角色控制其移动
-@onready var player: CharacterBody2D = $MapTest/Character
+@onready var player: CharacterBody2D = $MapTest/Character2
 # 引用对话UI
 @onready var dialogue_ui: CanvasLayer = $DialogueUI
 # 引用任务面板UI
