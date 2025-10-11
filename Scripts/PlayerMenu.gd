@@ -2,6 +2,8 @@ extends CanvasLayer
 
 const PORTRAIT_SIZE = Vector2(250, 400)
 
+
+
 @onready var panel_container: PanelContainer = $PanelContainer
 @onready var adjust_button: Button = $"PanelContainer/MarginContainer/HBoxContainer/FormationPanel/AdjustButton"
 @onready var combat_party_grid: GridContainer = $"PanelContainer/MarginContainer/HBoxContainer/FormationPanel/CombatPartyPanel/CombatPartyGrid"
@@ -17,8 +19,18 @@ const PORTRAIT_SIZE = Vector2(250, 400)
 @onready var inventory_grid: GridContainer = $"PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer/InventoryGrid"
 @onready var close_button: Button = $"PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/CloseButton"
 
+@onready var inventory_context_menu: ItemActionMenu = $PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer/ItemActionMenu
+@onready var inventory_highlight: Panel = $PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer/InventoryHighlight
+
 var adjust_mode := false
 var selected_character_id: String = ""
+
+var inventory_buttons: Array[Button] = []
+var inventory_cursor := -1
+var inventory_hover := -1
+
+var inventory_menu_slot := -1
+var inventory_menu_open = false
 
 func _ready() -> void:
 	hide()
@@ -32,8 +44,13 @@ func _ready() -> void:
 	equipment_grid.columns = 2
 	skills_grid.columns = 1
 	stats_grid.columns = 2
+	
 	adjust_button.pressed.connect(_on_adjust_button_pressed)
 	close_button.pressed.connect(close_menu)
+	
+	inventory_context_menu.action_selected.connect(_on_inventory_action_selected)
+	inventory_highlight.visible = false
+	
 	refresh_menu()
 
 func open_menu() -> void:
@@ -67,6 +84,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			open_menu()
 			get_viewport().set_input_as_handled()
 			return
+	if not visible:
+		return
+	if event.is_action_pressed("ui_left"):
+		_move_inventory_cursor(Vector2.LEFT)
+	elif event.is_action_pressed("ui_right"):
+		_move_inventory_cursor(Vector2.RIGHT)
+	elif event.is_action_pressed("ui_up"):
+		_move_inventory_cursor(Vector2.UP)
+	elif event.is_action_pressed("ui_down"):
+		_move_inventory_cursor(Vector2.DOWN)
+	elif event.is_action_pressed("ui_accept"):
+		_trigger_inventory_context_menu()
+	elif event.is_action_pressed("ui_cancel"):
+		inventory_context_menu.hide()
 
 func refresh_menu() -> void:
 	_ensure_selected_character()
@@ -249,11 +280,17 @@ func _update_skills_display(stats: CharacterStats) -> void:
 		skills_grid.add_child(name_label)
 
 func _update_inventory_display() -> void:
+	inventory_buttons.clear()
+	inventory_cursor = -1
+	inventory_hover = -1
+	inventory_highlight.visible = false
+
 	for child in inventory_grid.get_children():
 		child.queue_free()
 
 	var can_equip := not selected_character_id.is_empty()
-	for slot in GameManager.player_current_inventory:
+	for slot_index in GameManager.player_current_inventory.size():
+		var slot = GameManager.player_current_inventory[slot_index]
 		if not slot or not slot.item:
 			continue
 		var item: Item = slot.item
@@ -262,15 +299,32 @@ func _update_inventory_display() -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.tooltip_text = item.description
 
+		button.icon = item.icon
+		button.add_theme_constant_override("icon_separation", 8)
+
+		
+
 		var is_equipment := item.equipment_props != null
 		var is_consumable := item.consumable_props != null
 		if can_equip and (is_equipment or is_consumable):
 			button.disabled = false
-			button.pressed.connect(_on_inventory_item_clicked.bind(item))
-		else:
-			button.disabled = true
+			button.pressed.connect(_on_inventory_slot_pressed.bind(slot_index))
+			button.mouse_entered.connect(_on_inventory_slot_hovered.bind(slot_index))
+			button.mouse_exited.connect(_on_inventory_slot_unhovered.bind(slot_index))		
 
 		inventory_grid.add_child(button)
+		inventory_buttons.append(button)
+
+func _update_inventory_highlight() -> void:
+	if inventory_cursor < 0 or inventory_cursor >= inventory_buttons.size():
+		inventory_highlight.visible = false
+		return
+	var target = inventory_buttons[inventory_cursor]
+	inventory_highlight.visible = true
+	inventory_highlight.global_position = target.global_position
+	inventory_highlight.size = target.size
+	inventory_highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	inventory_buttons[inventory_cursor].button_pressed = true
 
 func _on_equipment_slot_clicked(slot_enum: EquipmentComponent.EquipmentSlot) -> void:
 	if selected_character_id.is_empty():
@@ -375,3 +429,103 @@ func _describe_skill(skill: Skill) -> String:
 func _format_slot_name(raw_name: String) -> String:
 	var with_spaces := raw_name.capitalize().replace("_", " ")
 	return with_spaces
+
+func _move_inventory_cursor(direction: Vector2) -> void:
+	if inventory_buttons.is_empty():
+		return
+	if inventory_cursor < 0:
+		inventory_cursor = 0
+	else:
+		var columns: int = max(1, inventory_grid.columns)
+		match direction:
+			Vector2.LEFT:
+				inventory_cursor = max(0, inventory_cursor - 1)
+			Vector2.RIGHT:
+				inventory_cursor = min(inventory_buttons.size() - 1, inventory_cursor + 1)
+			Vector2.UP:
+				inventory_cursor = max(0, inventory_cursor - columns)
+			Vector2.DOWN:
+				inventory_cursor = min(inventory_buttons.size() - 1, inventory_cursor + columns)
+	_update_inventory_highlight()
+
+func _trigger_inventory_context_menu() -> void:
+	if inventory_cursor < 0 or inventory_cursor >= inventory_buttons.size():
+		return
+	if inventory_menu_open and inventory_menu_slot == inventory_cursor:
+		inventory_context_menu.hide()
+		inventory_menu_slot = -1
+		return
+	var target := inventory_buttons[inventory_cursor]
+	_show_inventory_context_menu(inventory_cursor, target.global_position) # + Vector2(0, target.size.y)
+
+func _on_inventory_slot_hovered(slot_index: int) -> void:
+	inventory_hover = slot_index
+	inventory_cursor = slot_index
+	_update_inventory_highlight()
+
+func _on_inventory_slot_unhovered(slot_index: int) -> void:
+	if inventory_hover == slot_index:
+		inventory_hover = -1
+
+func _on_inventory_slot_pressed(slot_index: int) -> void:
+	inventory_cursor = slot_index
+	_update_inventory_highlight()
+	_trigger_inventory_context_menu()
+
+func _show_inventory_context_menu(slot_index: int, popup_position: Vector2) -> void:
+	inventory_context_menu.hide()
+	var slot := GameManager.player_current_inventory[slot_index]
+	if not slot or not slot.item:
+		return
+	inventory_menu_slot = slot_index
+	inventory_context_menu.open_with_item(
+		slot.item,
+		popup_position
+	)
+	inventory_menu_open = true
+
+func _populate_inventory_menu(item: Item) -> void:
+	inventory_context_menu.clear()
+	if item.consumable_props:
+		inventory_context_menu.add_item("食用", ItemActionMenu.Action.CONSUME)
+	if item.equipment_props:
+		inventory_context_menu.add_item("装备", ItemActionMenu.Action.EQUIP)
+		inventory_context_menu.add_item("添加到快捷背包", ItemActionMenu.Action.ADD_TO_SHORTCUT)
+
+func _on_inventory_context_menu_id_pressed(id: int) -> void:
+	if inventory_cursor < 0 or inventory_cursor >= GameManager.player_current_inventory.size():
+		return
+	var slot := GameManager.player_current_inventory[inventory_cursor]
+	if not slot or not slot.item:
+		return
+	_execute_inventory_action(id, slot.item)
+	inventory_context_menu.hide()
+	_update_inventory_display()
+
+func _execute_inventory_action(action_id: int, item: Item) -> void:
+	match action_id:
+		ItemActionMenu.Action.CONSUME:
+			_consume_item(item)
+		ItemActionMenu.Action.EQUIP:
+			_equip_item(item)
+		ItemActionMenu.Action.ADD_TO_SHORTCUT:
+			QuickbarManager.add_from_inventory(item)
+
+# 将原有装备与食用逻辑提炼成复用函数
+func _equip_item(item: Item) -> void:
+	if item.equipment_props and not selected_character_id.is_empty():
+		GameManager.equip_item_for_character(selected_character_id, item)
+		refresh_selected_character()
+
+func _consume_item(item: Item) -> void:
+	if item.consumable_props and not selected_character_id.is_empty():
+		_on_inventory_item_clicked(item) # 或者把消耗逻辑拆成独立函数后调用
+
+func _on_inventory_action_selected(action: ItemActionMenu.Action, item: Item, ctx: Dictionary) -> void:
+	inventory_cursor = ctx.get("slot_index", inventory_cursor)
+	inventory_menu_slot = -1
+	_execute_inventory_action(action, item)
+	_update_inventory_display()
+
+func _on_inventory_menu_hidden() -> void:
+	inventory_menu_slot = -1

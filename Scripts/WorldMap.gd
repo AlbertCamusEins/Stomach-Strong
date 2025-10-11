@@ -3,13 +3,13 @@ extends Node2D
 
 # --- 节点引用 ---
 # 引用烹饪UI
-@onready var cooking_ui: CanvasLayer = $CookingUi
+@onready var cooking_ui: CanvasLayer = $UI/CookingUi
 # 引用玩家角色控制其移动
-@onready var player: CharacterBody2D = $MapTest/Character2
+@onready var player: CharacterBody2D = $Ysort/Character
 # 引用对话UI
-@onready var dialogue_ui: CanvasLayer = $DialogueUI
+@onready var dialogue_ui: CanvasLayer = $UI/DialogueUI
 # 引用任务面板UI
-@onready var quest_journal_ui: CanvasLayer = $QuestJournalUI
+@onready var quest_journal_ui: CanvasLayer = $UI/QuestJournalUI
 
 
 # --- 导出变量 ---

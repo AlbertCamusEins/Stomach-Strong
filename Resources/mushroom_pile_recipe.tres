@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=8 format=3 uid="uid://cvji675lanqgy"]
+
+[ext_resource type="Resource" uid="uid://dg42c1om4lj0m" path="res://Resources/mushroom_pile.tres" id="1_amtyg"]
+[ext_resource type="Script" uid="uid://cxjxp0v18hxrx" path="res://Scripts/IngredientSlot.gd" id="1_vxt7h"]
+[ext_resource type="Resource" uid="uid://bijmywa71k1gc" path="res://Resources/mushroom.tres" id="2_amtyg"]
+[ext_resource type="Script" uid="uid://b8isbdtst717r" path="res://Scripts/CraftingRecipe.gd" id="3_osxj5"]
+
+[sub_resource type="Resource" id="Resource_xl0tx"]
+script = ExtResource("1_vxt7h")
+slot_index = 0
+item = ExtResource("2_amtyg")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_w0aoo"]
+script = ExtResource("1_vxt7h")
+slot_index = 1
+item = ExtResource("2_amtyg")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_5021x"]
+script = ExtResource("1_vxt7h")
+slot_index = 2
+item = ExtResource("2_amtyg")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[resource]
+script = ExtResource("3_osxj5")
+recipe_id = &"0001"
+output_item = ExtResource("1_amtyg")
+output_quantity = 1
+pattern = Array[ExtResource("1_vxt7h")]([SubResource("Resource_xl0tx"), SubResource("Resource_w0aoo"), SubResource("Resource_5021x")])
+metadata/_custom_type_script = "uid://b8isbdtst717r"

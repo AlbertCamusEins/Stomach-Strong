@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=10 format=3 uid="uid://dgpd4648nal6n"]
+
+[ext_resource type="Resource" uid="uid://tyw0nqi6pv1w" path="res://Resources/apple_cross.tres" id="1_coicd"]
+[ext_resource type="Script" uid="uid://cxjxp0v18hxrx" path="res://Scripts/IngredientSlot.gd" id="1_r736l"]
+[ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="2_coicd"]
+[ext_resource type="Script" uid="uid://b8isbdtst717r" path="res://Scripts/CraftingRecipe.gd" id="3_mal7n"]
+
+[sub_resource type="Resource" id="Resource_1f3x1"]
+script = ExtResource("1_r736l")
+slot_index = 1
+item = ExtResource("2_coicd")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_fckvw"]
+script = ExtResource("1_r736l")
+slot_index = 3
+item = ExtResource("2_coicd")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_b06w4"]
+script = ExtResource("1_r736l")
+slot_index = 4
+item = ExtResource("2_coicd")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_b46de"]
+script = ExtResource("1_r736l")
+slot_index = 5
+item = ExtResource("2_coicd")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[sub_resource type="Resource" id="Resource_a6s4f"]
+script = ExtResource("1_r736l")
+slot_index = 7
+item = ExtResource("2_coicd")
+metadata/_custom_type_script = "uid://cxjxp0v18hxrx"
+
+[resource]
+script = ExtResource("3_mal7n")
+recipe_id = &"0002"
+output_item = ExtResource("1_coicd")
+output_quantity = 1
+pattern = Array[ExtResource("1_r736l")]([SubResource("Resource_1f3x1"), SubResource("Resource_fckvw"), SubResource("Resource_b06w4"), SubResource("Resource_b46de"), SubResource("Resource_a6s4f")])
+metadata/_custom_type_script = "uid://b8isbdtst717r"

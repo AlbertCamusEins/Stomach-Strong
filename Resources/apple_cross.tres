@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://tyw0nqi6pv1w"]
+
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_6ohuu"]
+[ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_hht0n"]
+[ext_resource type="Texture2D" uid="uid://bri5x3o2bpc4i" path="res://Assets/apple-cross.png" id="2_10xlu"]
+
+[sub_resource type="Resource" id="Resource_37yj8"]
+script = ExtResource("1_hht0n")
+health_change = 100
+satiety_change = 100
+mana_change = 0
+add_max_health = 0
+add_max_satiety = 0
+add_max_mana = 0
+add_attack = 0
+add_defense = 0
+add_base_speed = 0
+metadata/_custom_type_script = "uid://b7ddghsgeh82d"
+
+[resource]
+script = ExtResource("1_6ohuu")
+item_name = "apple cross"
+description = "a cross of 5 apples"
+stackable = true
+max_stack_size = 5
+icon = ExtResource("2_10xlu")
+consumable_props = SubResource("Resource_37yj8")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

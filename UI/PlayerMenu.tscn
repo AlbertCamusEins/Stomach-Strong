@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://mjrdj64swlve"]
+[gd_scene load_steps=3 format=3 uid="uid://mjrdj64swlve"]
 
 [ext_resource type="Script" uid="uid://tu44x7lwa7od" path="res://Scripts/PlayerMenu.gd" id="1_r4bku"]
+[ext_resource type="PackedScene" uid="uid://vc428yl3fp1u" path="res://UI/ItemActionMenu.tscn" id="2_dxgqy"]
 
 [node name="PlayerMenu" type="CanvasLayer"]
 script = ExtResource("1_r4bku")
@@ -144,10 +145,18 @@ text = "Item"
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="ItemActionMenu" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("2_dxgqy")]
+visible = false
+unfocusable = false
+
 [node name="InventoryGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 3
+columns = 2
+
+[node name="InventoryHighlight" type="Panel" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
+visible = false
+layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(0, 20)

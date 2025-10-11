@@ -26,7 +26,7 @@ func _on_body_exited(body):
 
 func _unhandled_input(event: InputEvent):
 	# 当提示显示时按下交互键，触发对话
-	if prompt_label.visible and event.is_action_pressed("ui_accepted"):
+	if prompt_label.visible and self.visible and event.is_action_pressed("ui_accepted"):
 		if dialogue:
 			emit_signal("player_interacted", dialogue, self)
 			print("NPC 可交互，对话开始")

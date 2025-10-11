@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dg1n8k682l5lp"]
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://dg1n8k682l5lp"]
 
 [ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_3bad0"]
 [ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_g8q2e"]
+[ext_resource type="Texture2D" uid="uid://dx5bswgysrubo" path="res://Assets/apple.png" id="2_4fngm"]
 
 [sub_resource type="Resource" id="Resource_4fngm"]
 script = ExtResource("1_g8q2e")
@@ -22,5 +23,6 @@ item_name = "apple"
 description = "a juicy apple."
 stackable = true
 max_stack_size = 99
+icon = ExtResource("2_4fngm")
 consumable_props = SubResource("Resource_4fngm")
 metadata/_custom_type_script = "uid://cthurke7ur60a"

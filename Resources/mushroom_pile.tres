@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://dg42c1om4lj0m"]
+
+[ext_resource type="Texture2D" uid="uid://8o2xhrmf5vyo" path="res://Assets/mushroom-pile.png" id="1_1jsp5"]
+[ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_ooqkj"]
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="2_ooqkj"]
+
+[sub_resource type="Resource" id="Resource_77vac"]
+script = ExtResource("1_ooqkj")
+health_change = 30
+satiety_change = 45
+mana_change = 0
+add_max_health = 0
+add_max_satiety = 0
+add_max_mana = 0
+add_attack = 0
+add_defense = 0
+add_base_speed = 0
+metadata/_custom_type_script = "uid://b7ddghsgeh82d"
+
+[resource]
+script = ExtResource("2_ooqkj")
+item_name = "mushroom pile"
+description = "a plie of mushrooms"
+stackable = true
+max_stack_size = 5
+icon = ExtResource("1_1jsp5")
+consumable_props = SubResource("Resource_77vac")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

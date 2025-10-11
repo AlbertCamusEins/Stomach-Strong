@@ -8,7 +8,7 @@ class_name Item extends Resource
 @export_multiline var description: String
 @export var stackable: bool = true # 默认所有物品都可以堆叠
 @export var max_stack_size: int = 5 # 最大堆叠数量
-# @export var icon: Texture2D
+@export var icon: Texture2D
 
 @export_group("功能组件 (可选)")
 # 一个物品可以拥有的不同功能组件

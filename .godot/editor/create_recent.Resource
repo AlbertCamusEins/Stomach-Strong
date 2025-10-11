@@ -1,9 +1,10 @@
+Item
+CraftingRecipe
 Skill
 Quest
 DialogueActionAddItem
 DialogueAction
 Dialogue
-Item
 CharacterData
 Encounter
 Recipe

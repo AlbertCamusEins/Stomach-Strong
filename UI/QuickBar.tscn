@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds5ia05mmwfww"]
+
+[ext_resource type="PackedScene" uid="uid://vc428yl3fp1u" path="res://UI/ItemActionMenu.tscn" id="1_34in0"]
+[ext_resource type="Script" uid="uid://bqc6ls36ijugt" path="res://Scripts/QuickBar.gd" id="1_f3g2j"]
+[ext_resource type="Theme" uid="uid://48wwrqm2p5lx" path="res://Resources/button1.tres" id="2_2qtqd"]
+
+[node name="QuickBar" type="CanvasLayer"]
+script = ExtResource("1_f3g2j")
+
+[node name="SlotHighlight" type="Panel" parent="."]
+visible = false
+offset_left = 280.0
+offset_top = 736.0
+offset_right = 280.0
+offset_bottom = 736.0
+
+[node name="SlotsContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -338.0
+offset_top = -64.0
+offset_right = 338.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_2qtqd")
+
+[node name="Button0" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button1" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button2" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button3" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button4" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button5" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button6" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button7" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button8" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="Button9" type="Button" parent="SlotsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("2_2qtqd")
+
+[node name="ItemActionMenu" parent="SlotsContainer" instance=ExtResource("1_34in0")]
+visible = false
+unfocusable = false

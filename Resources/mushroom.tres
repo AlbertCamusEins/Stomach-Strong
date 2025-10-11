@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bijmywa71k1gc"]
+
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_wvnmp"]
+[ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_xxxpj"]
+[ext_resource type="Texture2D" uid="uid://dmqp61hbgxi4r" path="res://Assets/mushroom-single.png" id="2_xhp7k"]
+
+[sub_resource type="Resource" id="Resource_xhp7k"]
+script = ExtResource("1_xxxpj")
+health_change = 10
+satiety_change = 10
+mana_change = 0
+add_max_health = 0
+add_max_satiety = 0
+add_max_mana = 0
+add_attack = 0
+add_defense = 0
+add_base_speed = 0
+metadata/_custom_type_script = "uid://b7ddghsgeh82d"
+
+[resource]
+script = ExtResource("1_wvnmp")
+item_name = "mushroom"
+description = "live in shadows"
+stackable = true
+max_stack_size = 5
+icon = ExtResource("2_xhp7k")
+consumable_props = SubResource("Resource_xhp7k")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

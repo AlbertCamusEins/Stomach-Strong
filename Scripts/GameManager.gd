@@ -15,7 +15,7 @@ const SAVE_FILE_PATH = "user://savegame.tres"
 @export var initial_player_inventory: Array[InventorySlot]
 @export var initial_recipes: Array[Recipe]
 @export var initial_techniques: Array[CookingTechnique]
-
+@export var quickbar_slots: Array
 
 # --- 实时游戏数据 ---
 # 这两个变量将贯穿整个游戏，保存玩家的当前状态。
@@ -35,6 +35,7 @@ var player_known_recipes: Array[Recipe]
 var player_known_techniques: Array[CookingTechnique]
 
 var current_scene: Node = null
+var player_node: Node = null
 
 # --- [新增] 队伍管理变量 (添加到“实时游戏数据”部分) ---
 # 存储玩家拥有的所有角色
